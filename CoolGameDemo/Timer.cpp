@@ -1,35 +1,52 @@
-#include "PreCompile.h"
-#include "Timer.h"
+#include "timer.h"
+#include "pre_compile.h"
 
-#define FREQ_DEFAULT_VALUE 10 * 1024 * 1024
+const int kDefaultFrequencyValue = 10 * 1024 * 1024;
 
 Timer::Timer()
 {
-	m_nFrequency.QuadPart = FREQ_DEFAULT_VALUE;
-	m_nStartTime.QuadPart = 0;
-	m_nStopTime.QuadPart = 0;
-	QueryPerformanceFrequency(&m_nFrequency);
+  frequency_.QuadPart = kDefaultFrequencyValue;
+  start_time_.QuadPart = 0;
+  stop_time_.QuadPart = 0;
+  QueryPerformanceFrequency(&frequency_);
 }
-
 
 Timer::~Timer()
 {
 }
 
-void Timer::start()
+void Timer::Start()
 {
-	QueryPerformanceCounter(&m_nStartTime);
+  QueryPerformanceCounter(&start_time_);
 }
 
-void Timer::stop()
+void Timer::Stop()
 {
-	QueryPerformanceCounter(&m_nStopTime);
+  QueryPerformanceCounter(&stop_time_);
 }
 
-unsigned int Timer::getElapse()
+int Timer::GetElapse()
 {
-
+  LARGE_INTEGER time;
+  QueryPerformanceCounter(&time);
+  return static_cast<int>((time.QuadPart - start_time_.QuadPart) * 1000 / frequency_.QuadPart);
 }
-unsigned int Timer::getElapseMicrosecond()
-unsigned int Timer::getElapseFrequency()
-unsigned int Timer::getInterval()
+
+int Timer::GetElapseMicrosecond()
+{
+  LARGE_INTEGER time;
+  QueryPerformanceCounter(&time);
+  return static_cast<int>((time.QuadPart - start_time_.QuadPart) * 1000000 / frequency_.QuadPart);
+}
+
+int Timer::GetElapseFrequency()
+{
+  LARGE_INTEGER time;
+  QueryPerformanceCounter(&time);
+  return static_cast<int>(time.QuadPart - start_time_.QuadPart);
+}
+
+int Timer::GetInterval()
+{
+  return static_cast<int>((stop_time_.QuadPart - start_time_.QuadPart) * 1000 / frequency_.QuadPart);
+}
