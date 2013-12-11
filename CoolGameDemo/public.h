@@ -9,8 +9,8 @@
 #ifndef ENGINE_PUBLIC_H_
 #define ENGINE_PUBLIC_H_
 
-// ½ûÖ¹Ê¹ÓÃ¿½±´¹¹Ôìº¯ÊýºÍ operator= ¸³Öµ²Ù×÷µÄºê
-// Ó¦¸ÃÀàµÄ private: ÖÐÊ¹ÓÃ
+// ï¿½ï¿½Ö¹Ê¹ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½ï¿½ï¿½ operator= ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Äºï¿½
+// Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ private: ï¿½ï¿½Ê¹ï¿½ï¿½
 #define DISALLOW_COPY_AND_ASSIGN(TypeName) \
   TypeName(const TypeName&); \
   void operator=(const TypeName&)
