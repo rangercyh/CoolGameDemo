@@ -9,8 +9,7 @@
 #ifndef ENGINE_PUBLIC_H_
 #define ENGINE_PUBLIC_H_
 
-// ��ֹʹ�ÿ������캯���� operator= ��ֵ�����ĺ�
-// Ӧ������ private: ��ʹ��
+// put into private: to avoid implicit call operater= and copy construct function
 #define DISALLOW_COPY_AND_ASSIGN(TypeName) \
   TypeName(const TypeName&); \
   void operator=(const TypeName&)
